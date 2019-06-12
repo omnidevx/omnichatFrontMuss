@@ -1,6 +1,7 @@
 import NavBar from './components/NavBar';
 import Message from './components/Message';
 import React, { Component } from 'react';
+import Chat from './components/Chat';
 
 class App extends Component {
   constructor (props) {
@@ -29,7 +30,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Message sender={'some sender'} body={'some body lol omfg'} />
+        <Chat />
       </div>
     );
   }

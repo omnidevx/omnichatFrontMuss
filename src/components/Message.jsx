@@ -3,16 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import '../index.css'
+import '../index.css';
 
 class Message extends Component {
-
   render() {
     return (
       <Card className="card">
         <CardContent>
           <Typography className="typo" color="textSecondary" gutterBottom>
-            {this.props.sender}
+            {this.props.senderName}
           </Typography>
           <Typography variant="body2" component="p">
             {this.props.body}

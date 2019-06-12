@@ -16,5 +16,11 @@ code {
   color: blue;
 }
 
-.master {
+.time {
+  position: relative;
+  text-align: right;
+}
+
+.MuiCardContent-root {
+  padding-bottom: 10px !important;
 }
