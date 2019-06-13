@@ -1,7 +1,7 @@
 import NavBar from './components/NavBar';
-import Message from './components/Message';
 import React, { Component } from 'react';
 import Chat from './components/Chat';
+import WelcomeScreen from './components/WelcomeScreen';
 
 class App extends Component {
   constructor (props) {
@@ -22,15 +22,31 @@ class App extends Component {
             body: 'first message'
           }
         ]
-      }
+      },
+      username: ''
     };
+  }
+
+  setUsername (e) {
+    this.setState({
+      username: e
+    });
+  }
+
+  showWelcomeScreenOrChat () {
+    console.log(this.state.username);
+    if (this.state.username !== '') {
+      return <Chat username={this.state.username} />;
+    } else {
+      return <WelcomeScreen setUsername={this.setUsername.bind(this)} />;
+    }
   }
 
   render () {
     return (
       <div>
         <NavBar />
-        <Chat />
+        {this.showWelcomeScreenOrChat()}
       </div>
     );
   }

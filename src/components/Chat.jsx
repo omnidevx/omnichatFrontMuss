@@ -7,7 +7,7 @@ class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      senderName: 'sender',
+      senderName: this.props.username,
       body: 'body',
       messages: []
     };
@@ -24,11 +24,16 @@ class Chat extends React.Component {
       console.log(this.state.messages);
     };
 
-    this.sendMessage = ev => {
-      ev.preventDefault();
+    this.sendMessage = msg => {
+      //this.preventDefault();
+      this.setState({
+        body: msg
+      });
+      console.log(msg);
+      console.log(this.state.body);
       this.socket.emit('message', {
         senderName: this.state.senderName,
-        body: this.state.body
+        body: msg
       });
       this.setState({ message: '' });
     };
@@ -38,9 +43,9 @@ class Chat extends React.Component {
     return (
       <div>
         {this.state.messages.map((message, i) => {
-          return <Message senderName={message.senderName} body={message.body} />;
+          return <Message senderName={message.senderName} body={message.body} myName={this.state.senderName} />;
         })}
-        <InputBox />
+        <InputBox submitMessage={this.sendMessage.bind(this)} />
       </div>
     );
   }

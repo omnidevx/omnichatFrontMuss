@@ -14,6 +14,7 @@ code {
 
 .card {
   color: blue;
+  box-shadow: 6px 5px 27px -9px rgba(0, 0, 0, 0.75);
 }
 
 .time {
@@ -23,4 +24,41 @@ code {
 
 .MuiCardContent-root {
   padding-bottom: 10px !important;
+}
+
+.inputBox {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+  padding: 2.5px;
+}
+
+.inputBox>input {
+  height: 35px;
+  width: 70%;
+  border: 1px solid black;
+  font-size: 110%;
+}
+
+.inputBox>input[type='button'] {
+  height: 35px;
+  width: 20%;
+  border: none;
+  margin-left: 15px;
+  margin-top: 1px;
+  background-color: rgb(66, 83, 175);
+  color: white;
+}
+
+.itsMe {
+  background-color: #2244ee40 !important;
+}
+
+.itsNotMe {
+  background-color: #ee44ee40 !important;
 }
