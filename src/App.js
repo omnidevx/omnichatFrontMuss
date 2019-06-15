@@ -2,50 +2,93 @@ import NavBar from './components/NavBar';
 import React, { Component } from 'react';
 import Chat from './components/Chat';
 import WelcomeScreen from './components/WelcomeScreen';
+import Login from './components/Login';
+import * as rp from 'request-promise';
 
 class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      user: {
-        name: ''
-      },
-      chat: {
-        onlineUsers: 0,
-        messages: [
-          {
-            sender: 'ich',
-            body: 'first message'
-          },
-          {
-            sender: 'ich',
-            body: 'first message'
-          }
-        ]
-      },
-      username: ''
+      jwt: '',
+      isLoaded: false,
+      client: {
+        username: '',
+        userId: 0,
+        conversations: [1, 2, 3]
+      }
     };
+
+    this.applicationLogin();
+    this.handleClient = this.handleClient.bind(this);
   }
 
-  setUsername (e) {
+  handleClient (clientData) {
     this.setState({
-      username: e
+      client: clientData
     });
   }
 
+  componentDidUpdate () {
+    console.log(this.state.client);
+  }
+
   showWelcomeScreenOrChat () {
-    console.log(this.state.username);
-    if (this.state.username !== '') {
-      return <Chat username={this.state.username} />;
+    if (this.state.client.username !== '') {
+      return <Chat client={this.state.client} />;
     } else {
-      return <WelcomeScreen setUsername={this.setUsername.bind(this)} />;
+      return (
+        <div>
+          <NavBar />
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)'
+            }}
+          >
+            <Login onLogin={this.handleClient} />
+          </div>
+        </div>
+      );
     }
+  }
+
+  loginRequest () {
+    return rp({
+      method: 'POST',
+      url: 'http://localhost:3131/auth/login',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        username: process.env.REACT_APP_FRONT_USERNAME,
+        password: process.env.REACT_APP_FRONT_PASSWORD
+      },
+      json: true
+    });
+  }
+
+  loadClient() {
+
+  }
+
+  clientRequest() {
+    return new Promise(resolve => {
+      resolve({
+        
+      })
+    })
+  }
+
+  async applicationLogin () {
+    const res = await this.loginRequest();
+    this.setState({ jwt: res });
   }
 
   render () {
     return (
       <div>
-        <NavBar />
         {this.showWelcomeScreenOrChat()}
       </div>
     );
