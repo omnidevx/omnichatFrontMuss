@@ -57,8 +57,31 @@ code {
 
 .itsMe {
   background-color: #2244ee40 !important;
+  max-width: 55%;
+  right: 0;
+  position: relative;
+  margin-left: -15px !important;
+  align-self: flex-end;
 }
 
 .itsNotMe {
   background-color: #ee44ee40 !important;
+  max-width: 55%;
 }
+
+.card {
+  margin: 15px;
+  width: 60%;
+  display: flex;
+}
+
+.card p {
+  clear: both;
+  float: left;
+}
+
+/* @media only screen and (max-width: 1200px) {
+  .card {
+    width: 50%;
+  }
+} */

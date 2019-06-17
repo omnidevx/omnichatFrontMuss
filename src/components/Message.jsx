@@ -29,9 +29,11 @@ class Message extends Component {
             <Typography className="typo" color="textSecondary" gutterBottom>
               {this.props.senderName}
             </Typography>
+            <br />
             <Typography variant="body2" component="p">
               {this.props.body}
             </Typography>
+            <br />
             <Typography className="time" color="textSecondary">
               {new Date().toLocaleTimeString()}
             </Typography>

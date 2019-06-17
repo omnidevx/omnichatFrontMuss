@@ -77,8 +77,8 @@ export default class Login extends Component {
         'Content-Type': 'application/json'
       },
       body: {
-        username: process.env.REACT_APP_FRONT_USERNAME,
-        password: process.env.REACT_APP_FRONT_PASSWORD
+        username: this.state.username,
+        password: this.state.password
       },
       json: true
     });

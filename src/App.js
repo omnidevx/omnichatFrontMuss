@@ -4,6 +4,7 @@ import Chat from './components/Chat';
 import WelcomeScreen from './components/WelcomeScreen';
 import Login from './components/Login';
 import * as rp from 'request-promise';
+import Overview from './components/Overview';
 
 class App extends Component {
   constructor (props) {
@@ -12,84 +13,81 @@ class App extends Component {
       jwt: '',
       isLoaded: false,
       client: {
-        username: '',
+        username: 'lil_quest1',
         userId: 0,
         conversations: [1, 2, 3]
       }
     };
 
-    this.applicationLogin();
-    this.handleClient = this.handleClient.bind(this);
+    // this.applicationLogin();
+    // this.handleClient = this.handleClient.bind(this);
   }
 
-  handleClient (clientData) {
-    this.setState({
-      client: clientData
-    });
-  }
+  // handleClient (clientData) {
+  //   this.setState({
+  //     client: clientData
+  //   });
+  // }
 
-  componentDidUpdate () {
-    console.log(this.state.client);
-  }
+  // componentDidUpdate () {
+  //   console.log(this.state.client);
+  // }
 
   showWelcomeScreenOrChat () {
     if (this.state.client.username !== '') {
       return <Chat client={this.state.client} />;
     } else {
-      return (
-        <div>
-          <NavBar />
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)'
-            }}
-          >
-            <Login onLogin={this.handleClient} />
-          </div>
-        </div>
-      );
+      // return (
+      //   <div>
+      //     <NavBar />
+      //     <div
+      //       style={{
+      //         position: 'absolute',
+      //         left: '50%',
+      //         top: '50%',
+      //         transform: 'translate(-50%, -50%)'
+      //       }}
+      //     >
+      //       <Login onLogin={this.handleClient} />
+      //     </div>
+      //   </div>
+      // );
     }
   }
 
-  loginRequest () {
-    return rp({
-      method: 'POST',
-      url: 'http://localhost:3131/auth/login',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: {
-        username: process.env.REACT_APP_FRONT_USERNAME,
-        password: process.env.REACT_APP_FRONT_PASSWORD
-      },
-      json: true
-    });
-  }
+  // loginRequest () {
+  //   return rp({
+  //     method: 'POST',
+  //     url: 'http://localhost:3131/auth/login',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: {
+  //       username: process.env.REACT_APP_USERNAME,
+  //       password: process.env.REACT_APP_PASSWORD
+  //     },
+  //     json: true
+  //   });
+  // }
 
-  loadClient() {
+  // loadClient () {}
 
-  }
+  // clientRequest () {
+  //   return new Promise(resolve => {
+  //     resolve({});
+  //   });
+  // }
 
-  clientRequest() {
-    return new Promise(resolve => {
-      resolve({
-        
-      })
-    })
-  }
-
-  async applicationLogin () {
-    const res = await this.loginRequest();
-    this.setState({ jwt: res });
-  }
+  // async applicationLogin () {
+  //   const res = await this.loginRequest();
+  //   this.setState({ jwt: res });
+  // }
 
   render () {
     return (
       <div>
-        {this.showWelcomeScreenOrChat()}
+        {/* {this.showWelcomeScreenOrChat()} */}
+        <Overview />
       </div>
     );
   }
