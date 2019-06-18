@@ -19,7 +19,7 @@ import ProfileBar from './ProfileBar';
 import InputBox from './InputBox';
 import Chat from './Chat';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -97,7 +97,7 @@ export default function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            Samuel Nussbaumer
           </Typography>
         </Toolbar>
       </AppBar>

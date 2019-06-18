@@ -12,9 +12,9 @@ class ProfileBar extends Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <Avatar src="" style={{ 'margin-right': 10 }} />
+            <Avatar src="https://picsum.photos/200" style={{ 'margin-right': 10 }} />
             <Typography variant="h6" component="h5">
-              nasjkbnfasjfbai
+              Jonas Schultheiss
             </Typography>
           </Toolbar>
         </AppBar>

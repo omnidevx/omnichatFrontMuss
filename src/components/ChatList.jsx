@@ -158,13 +158,20 @@ class ChatList extends Component {
       <div>
         <List>
           <ListItem button>
-            <Avatar src={'https://picsum.photos/200'} style={{ 'margin-right': 10 }} />
+            <Avatar
+              src={'https://picsum.photos/200'}
+              style={{
+                'margin-right': 10,
+                width: 60,
+                height: 60
+              }}
+            />
             <ListItemText primary={'global chat'} />
           </ListItem>
           <Divider />
           {this.state.chats.map((chat, index) => (
             <ListItem button key={chat.title}>
-              <Avatar src={chat.pictureUri} style={{ 'margin-right': 10 }} />
+              <Avatar src={chat.pictureUri} style={{ 'margin-right': 10, width: 60, height: 60 }} />
               <ListItemText primary={chat.title} />
             </ListItem>
           ))}

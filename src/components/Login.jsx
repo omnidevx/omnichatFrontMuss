@@ -47,13 +47,17 @@ export default class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      error: {}
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+
     this.login = this.login.bind(this);
   }
+
+  handleError(e) {}
 
   handleUsernameChange(event) {
     this.setState({ username: event.target.value });
@@ -64,9 +68,17 @@ export default class Login extends Component {
   }
 
   async login() {
-    const res = await this.loginRequest();
-    const user = await jwt.verify(res, config.jwtSecret);
-    this.props.onLogin({ userId: user.userId, username: user.username });
+    try {
+      const res = await this.loginRequest();
+      const user = await jwt.verify(res, config.jwtSecret);
+      this.props.onLogin({ userId: user.userId, username: user.username });
+    } catch (error) {
+      if (error.statusCode === 401) {
+        alert('username or password is wrong.');
+      } else {
+        alert('something went wrong.');
+      }
+    }
   }
 
   loginRequest() {
@@ -87,58 +99,60 @@ export default class Login extends Component {
   render() {
     const classes = this.useStyles();
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Username"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={this.handleUsernameChange}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={this.handlePasswordChange}
-            />
-            <Button type="button" fullWidth variant="contained" color="primary" className={classes.submit} onClick={this.login.bind(this)}>
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                {/* <Link href="#" variant="body2">
+      <div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Username"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={this.handleUsernameChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={this.handlePasswordChange}
+              />
+              <Button type="button" fullWidth variant="contained" color="primary" className={classes.submit} onClick={this.login.bind(this)}>
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  {/* <Link href="#" variant="body2">
                   Forgot password?
                 </Link> */}
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-      </Container>
+            </form>
+          </div>
+        </Container>
+      </div>
     );
   }
 }
